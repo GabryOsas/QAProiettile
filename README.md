@@ -1,2 +1,2 @@
 # QAProiettile
-Source Code
+Sei pregato di non spacciare il plugin per tuo.
