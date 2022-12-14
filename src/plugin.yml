@@ -1,0 +1,11 @@
+main: me.gabryosas.Main
+name: QaProiettile
+version: 1.0
+api-version: 1.16
+description: plugin che implementa le ferite da proiettile
+author: GabryOsas
+prefix: QAProiettile
+commands:
+  bisturi:
+    description: Comando per givvarsi un bisturi
+    usage: /<command>
