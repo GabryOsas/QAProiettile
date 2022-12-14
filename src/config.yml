@@ -1,0 +1,32 @@
+#
+#  ▄▄█▀▀▀█▄█▀████▄     ▄███▀███▀▀▀██▄ ▀████▀███▀▀▀██▄
+#▄██▀     ▀█  ████    ████   ██    ▀██▄ ██   ██    ▀██▄
+#██▀       ▀  █ ██   ▄█ ██   ██     ▀██ ██   ██     ▀██ ▄▄█▀██▀██▀   ▀██▀
+#██           █  ██  █▀ ██   ██      ██ ██   ██      ██▄█▀   ██ ██   ▄█
+#██▄    ▀████ █  ██▄█▀  ██   ██     ▄██ ██   ██     ▄████▀▀▀▀▀▀  ██ ▄█
+#▀██▄     ██  █  ▀██▀   ██   ██    ▄██▀ ██   ██    ▄██▀██▄    ▄   ███
+#  ▀▀███████▄███▄ ▀▀  ▄████▄████████▀ ▄████▄████████▀   ▀█████▀    █
+#
+# Plugin creato da @GabryOsas / @GMDIdevelopment
+QAProiettile:
+  Title: "&cFerite da Proiettile"
+  SubTitle: "&7Sei stato colpito da un proiettile!"
+  Bisturi: "&bBisturi"
+  AntiJump: true
+  Material: STICK
+  Credits: true
+  BlacklistWorld:
+    - "world_nether"
+    - "world_the_end"
+Message:
+  NoPerms: "&cNon hai abbastanza permessi!"
+  Give: "&aItem givvato con successo!"
+  Jump: "&cSei ferito da un proiettile, di conseguenza non puoi saltare!"
+  Revive: "&aHai guarito il giocatore &e%target%!"
+  TargetRevive: "&aSei stato guarito da &e%player%"
+  NoDamage: "&cIl giocatore &e%target% &cnon è ferito!"
+  Reload: "&aPlugin ricaricato con successo!"
+  AntiConsole: "&cNon puoi eseguire questo comando dalla console!"
+Permission:
+  BisturiPerms: "bisturi.give"
+  ReloadPerms: "reload.use"
