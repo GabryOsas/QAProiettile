@@ -1,2 +1,2 @@
 # QAProiettile
-Sei pregato di non spacciare il plugin per tuo.
+Plugin che implementa le ferite da proiettile.
