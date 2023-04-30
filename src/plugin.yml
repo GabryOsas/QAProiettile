@@ -1,9 +1,10 @@
 main: me.gabryosas.Main
 name: QaProiettile
-version: 1.0
+version: 6.5
 api-version: 1.16
 description: plugin che implementa le ferite da proiettile
 author: GabryOsas
+depend: [QualityArmory]
 prefix: QAProiettile
 commands:
   bisturi:

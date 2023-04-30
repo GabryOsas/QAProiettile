@@ -1,33 +1,35 @@
 #
-#  ▄▄█▀▀▀█▄█▀████▄     ▄███▀███▀▀▀██▄ ▀████▀███▀▀▀██▄
-#▄██▀     ▀█  ████    ████   ██    ▀██▄ ██   ██    ▀██▄
-#██▀       ▀  █ ██   ▄█ ██   ██     ▀██ ██   ██     ▀██ ▄▄█▀██▀██▀   ▀██▀
-#██           █  ██  █▀ ██   ██      ██ ██   ██      ██▄█▀   ██ ██   ▄█
-#██▄    ▀████ █  ██▄█▀  ██   ██     ▄██ ██   ██     ▄████▀▀▀▀▀▀  ██ ▄█
-#▀██▄     ██  █  ▀██▀   ██   ██    ▄██▀ ██   ██    ▄██▀██▄    ▄   ███
-#  ▀▀███████▄███▄ ▀▀  ▄████▄████████▀ ▄████▄████████▀   ▀█████▀    █
+# ▄▄█▀▀██       █     ▀██▀▀█▄                   ██            ▄     ▄    ██  ▀██
+#▄█▀    ██     ███     ██   ██ ▄▄▄ ▄▄    ▄▄▄   ▄▄▄    ▄▄▄▄  ▄██▄  ▄██▄  ▄▄▄   ██    ▄▄▄▄
+#██      ██   █  ██    ██▄▄▄█▀  ██▀ ▀▀ ▄█  ▀█▄  ██  ▄█▄▄▄██  ██    ██    ██   ██  ▄█▄▄▄██
+#▀█▄  ▀▄ ▀█  ▄▀▀▀▀█▄   ██       ██     ██   ██  ██  ██       ██    ██    ██   ██  ██
+#  ▀█▄▄▄▀█▄ ▄█▄  ▄██▄ ▄██▄     ▄██▄     ▀█▄▄█▀ ▄██▄  ▀█▄▄▄▀  ▀█▄▀  ▀█▄▀ ▄██▄ ▄██▄  ▀█▄▄▄▀
 #
-# Plugin creato da @GabryOsas / @GMDIdevelopment
+#Plugin creato da GabryOsas / GMDIdevelopment
 QAProiettile:
-  Title: "&cFerite da Proiettile"
-  SubTitle: "&7Sei stato colpito da un proiettile!"
-  Bisturi: "&bBisturi"
-  AntiJump: true
-  Material: STICK
+  Update: true
   Credits: true
-  CostumModelData: 1
-  BlacklistWorld:
+  Anti-Jump: true
+  Title: "&cFerite da Proiettile"
+  Sub-Title: "&7Sei stato colpito da un proiettile!"
+  Scalpel: "&bBisturi"
+  Material: STICK
+  Costum-Model-Data: 1
+  Blacklist-World:
     - "world_nether"
     - "world_the_end"
 Message:
-  NoPerms: "&cNon hai abbastanza permessi!"
+  No-Perms: "&cNon hai abbastanza permessi!"
   Give: "&aItem givvato con successo!"
   Jump: "&cSei ferito da un proiettile, di conseguenza non puoi saltare!"
   Revive: "&aHai guarito il giocatore &e%target%!"
-  TargetRevive: "&aSei stato guarito da &e%player%"
-  NoDamage: "&cIl giocatore &e%target% &cnon è ferito!"
+  Target-Revive: "&aSei stato guarito da &e%player%"
+  No-Damage: "&cIl giocatore &e%target% &cnon è ferito!"
   Reload: "&aPlugin ricaricato con successo!"
-  AntiConsole: "&cNon puoi eseguire questo comando dalla console!"
+  Anti-Console: "&cNon puoi eseguire questo comando dalla console!"
+  Update-True: "&aCi sono nuovi aggiornamenti! Scarica la nuova versione dal seguente link: &ehttps://www.spigotmc.org/resources/qaproiettile.106719/"
+  Update-False: "&cNon ci sono aggiornamenti al momento."
 Permission:
-  BisturiPerms: "bisturi.give"
-  ReloadPerms: "reload.use"
+  Scalpel-Perms: "qaproiettile.scalpel.give" #Permesso per usare il comando /bisturi
+  Reload-Perms: "qaproiettile.reload.use" #Permesso per usare il comando /qareload
+  Override-Perms: "qaproiettile.hit.override" #Permesso per non subire le ferite da proiettile

@@ -12,14 +12,14 @@ public class ReloadConfig implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player){
             Player player = (Player) sender;
-            if (player.hasPermission(Main.plugin.getConfig().getString("Permission.ReloadPerms"))){
+            if (player.hasPermission(Main.plugin.getConfig().getString("Permission.Reload-Perms"))){
                 Main.plugin.reloadConfig();
                 player.sendMessage(ChatColor.translateAlternateColorCodes('&', Main.plugin.getConfig().getString("Message.Reload")));
             }else {
-                player.sendMessage(ChatColor.translateAlternateColorCodes('&', Main.plugin.getConfig().getString("Message.NoPerms")));
+                player.sendMessage(ChatColor.translateAlternateColorCodes('&', Main.plugin.getConfig().getString("Message.No-Perms")));
             }
         }else {
-            Main.plugin.getServer().getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', Main.plugin.getConfig().getString("Message.AntiConsole")));
+            Main.plugin.getServer().getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', Main.plugin.getConfig().getString("Message.Anti-Console")));
         }
         return true;
     }
