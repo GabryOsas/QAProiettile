@@ -2,6 +2,7 @@ package me.gabryosas;
 
 import me.gabryosas.commands.BisturiGive;
 import me.gabryosas.commands.ReloadConfig;
+import me.gabryosas.listeners.OnDeath;
 import me.gabryosas.listeners.OnFerite;
 import me.gabryosas.listeners.OnInteract;
 import me.gabryosas.listeners.OnJoin;
@@ -61,6 +62,7 @@ public final class Main extends JavaPlugin {
     }
     public void saveListener(){
         getServer().getPluginManager().registerEvents(new OnFerite(), this);
+        getServer().getPluginManager().registerEvents(new OnDeath(), this);
         getServer().getPluginManager().registerEvents(new OnInteract(), this);
         getServer().getPluginManager().registerEvents(new OnJoin(this), this);
         getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "\n" +

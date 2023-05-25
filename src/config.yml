@@ -10,11 +10,14 @@ QAProiettile:
   Update: true
   Credits: true
   Anti-Jump: true
+  Remove-OnDeath: true
   Title: "&cFerite da Proiettile"
   Sub-Title: "&7Sei stato colpito da un proiettile!"
   Scalpel: "&bBisturi"
   Material: STICK
   Costum-Model-Data: 1
+  Blacklist-Gun:
+    - "AK47"
   Blacklist-World:
     - "world_nether"
     - "world_the_end"

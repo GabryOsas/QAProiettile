@@ -11,24 +11,36 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 public class BisturiGive implements CommandExecutor {
+    private final String permission = Main.plugin.getConfig().getString("Permission.Scalpel-Perms");
+    private final String material = Main.plugin.getConfig().getString("QAProiettile.Material");
+    private final String displayName = ChatColor.translateAlternateColorCodes('&', Main.plugin.getConfig().getString("QAProiettile.Scalpel"));
+    private final int customModelData = Main.plugin.getConfig().getInt("QAProiettile.Costum-Model-Data");
+    private final String messageGive = ChatColor.translateAlternateColorCodes('&', Main.plugin.getConfig().getString("Message.Give"));
+    private final String messageNoPerms = ChatColor.translateAlternateColorCodes('&', Main.plugin.getConfig().getString("Message.No-Perms"));
+    private final String messageAntiConsole = ChatColor.translateAlternateColorCodes('&', Main.plugin.getConfig().getString("Message.Anti-Console"));
+
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (sender instanceof Player) {
-            Player player = (Player) sender;
-            if (player.hasPermission(Main.plugin.getConfig().getString("Permission.Scalpel-Perms"))){
-                ItemStack itemStack = new ItemStack(Material.valueOf(Main.plugin.getConfig().getString("QAProiettile.Material")));
-                ItemMeta itemMeta = itemStack.getItemMeta();
-                itemMeta.setDisplayName(ChatColor.translateAlternateColorCodes('&', Main.plugin.getConfig().getString("QAProiettile.Scalpel")));
-                itemMeta.setCustomModelData(Main.plugin.getConfig().getInt("QAProiettile.Costum-Model-Data"));
-                itemStack.setItemMeta(itemMeta);
-                player.getInventory().addItem(itemStack);
-                player.sendMessage(ChatColor.translateAlternateColorCodes('&', Main.plugin.getConfig().getString("Message.Give")));
-            } else {
-                player.sendMessage(ChatColor.translateAlternateColorCodes('&', Main.plugin.getConfig().getString("Message.No-Perms")));
-            }
-        }else {
-            Main.plugin.getServer().getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', Main.plugin.getConfig().getString("Message.Anti-Console")));
+        if (!(sender instanceof Player)) {
+            Main.plugin.getServer().getConsoleSender().sendMessage(messageAntiConsole);
+            return true;
         }
+
+        Player player = (Player) sender;
+        if (!player.hasPermission(permission)) {
+            player.sendMessage(messageNoPerms);
+            return true;
+        }
+
+        ItemStack itemStack = new ItemStack(Material.valueOf(material));
+        ItemMeta itemMeta = itemStack.getItemMeta();
+        itemMeta.setDisplayName(displayName);
+        itemMeta.setCustomModelData(customModelData);
+        itemStack.setItemMeta(itemMeta);
+
+        player.getInventory().addItem(itemStack);
+        player.sendMessage(messageGive);
         return true;
     }
 }
+

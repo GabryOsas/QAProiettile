@@ -13,22 +13,30 @@ public class OnJoin implements Listener {
     public OnJoin(Main plugin) {
         this.plugin = plugin;
     }
+
     @EventHandler
-    public void onJoin(PlayerJoinEvent e){
+    public void onJoin(PlayerJoinEvent e) {
         Player player = e.getPlayer();
-        if (Main.plugin.getConfig().getBoolean("QAProiettile.Credits")){
+
+        if (plugin.getConfig().getBoolean("QAProiettile.Credits")) {
             player.sendMessage("§9§lGMDI §7Plugin creato da §e@GabryOsas / @GMDIdevelopment");
         }
-        if (Main.plugin.getConfig().getBoolean("QAProiettile.Update")) {
-            if (player.hasPermission(Main.plugin.getConfig().getString("Permission.Scalpel-Perms"))) {
-                if (plugin.getUpdateChecker().isNewVersionAvailable(player)) {
-                    String updateMessage = ChatColor.translateAlternateColorCodes('&', Main.plugin.getConfig().getString("Message.Update-True"));
-                    player.sendMessage(updateMessage);
-                } else {
-                    String updateMessage = ChatColor.translateAlternateColorCodes('&', Main.plugin.getConfig().getString("Message.Update-False"));
-                    player.sendMessage(updateMessage);
-                }
-            }
+
+        if (!plugin.getConfig().getBoolean("QAProiettile.Update")) {
+            return;
+        }
+
+        if (!player.hasPermission(plugin.getConfig().getString("Permission.Scalpel-Perms"))) {
+            return;
+        }
+
+        if (plugin.getUpdateChecker().isNewVersionAvailable(player)) {
+            String updateMessage = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Message.Update-True"));
+            player.sendMessage(updateMessage);
+        } else {
+            String updateMessage = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Message.Update-False"));
+            player.sendMessage(updateMessage);
         }
     }
 }
+
