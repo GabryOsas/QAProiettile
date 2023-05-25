@@ -1,5 +1,5 @@
 # QAProiettile
-Source Code del plugin TecnoGodo
+Source Code del plugin QAProiettile
 
 ❓**FAQ**
 
