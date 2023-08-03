@@ -6,18 +6,23 @@
 #  ▀█▄▄▄▀█▄ ▄█▄  ▄██▄ ▄██▄     ▄██▄     ▀█▄▄█▀ ▄██▄  ▀█▄▄▄▀  ▀█▄▀  ▀█▄▀ ▄██▄ ▄██▄  ▀█▄▄▄▀
 #
 #Plugin creato da GabryOsas / GMDIdevelopment
+#Sorry for my bad English...
 QAProiettile:
-  Update: true
-  Credits: true
-  Anti-Jump: true
-  Remove-OnDeath: true
+  Items:
+    Name: "&bBisturi"
+    Material: STICK
+    Costum-Model-Data: 1
+    Lore:
+      - "&7Utilizzalo per guarire le persone!"
+  Boolean:
+    Update: true
+    Credits: true
+    Anti-Jump: true
+    Remove-On-Death: true
   Title: "&cFerite da Proiettile"
   Sub-Title: "&7Sei stato colpito da un proiettile!"
-  Scalpel: "&bBisturi"
-  Material: STICK
-  Costum-Model-Data: 1
   Blacklist-Gun:
-    - "AK47"
+    - "ak47"
   Blacklist-World:
     - "world_nether"
     - "world_the_end"
@@ -30,9 +35,16 @@ Message:
   No-Damage: "&cIl giocatore &e%target% &cnon è ferito!"
   Reload: "&aPlugin ricaricato con successo!"
   Anti-Console: "&cNon puoi eseguire questo comando dalla console!"
-  Update-True: "&aCi sono nuovi aggiornamenti! Scarica la nuova versione dal seguente link: &ehttps://www.spigotmc.org/resources/qaproiettile.106719/"
+  Update-True: "&aCi sono nuovi aggiornamenti! Scarica la nuova versione dal seguente link: %link%"
   Update-False: "&cNon ci sono aggiornamenti al momento."
+Events: #You cannot add other events you can only edit them ;P
+  potion-events:
+    Enable: true
+    Every: 10 #In seconds
+    Effects:
+      - SLOW, 1, 5 #level and time
+      - BLINDNESS, 1, 5
 Permission:
-  Scalpel-Perms: "qaproiettile.scalpel.give" #Permesso per usare il comando /bisturi
-  Reload-Perms: "qaproiettile.reload.use" #Permesso per usare il comando /qareload
-  Override-Perms: "qaproiettile.hit.override" #Permesso per non subire le ferite da proiettile
+  Scalpel-Perms: "qaproiettile.scalpel.give"
+  Reload-Perms: "qaproiettile.reload.use"
+  Override-Perms: "qaproiettile.hit.override"

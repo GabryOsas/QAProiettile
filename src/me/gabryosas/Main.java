@@ -1,18 +1,20 @@
 package me.gabryosas;
 
-import me.gabryosas.commands.BisturiGive;
-import me.gabryosas.commands.ReloadConfig;
+import me.gabryosas.commands.QACommand;
 import me.gabryosas.listeners.OnDeath;
 import me.gabryosas.listeners.OnFerite;
 import me.gabryosas.listeners.OnInteract;
 import me.gabryosas.listeners.OnJoin;
+import me.gabryosas.runnable.PotionRunnable;
 import me.gabryosas.utils.UpdateChecker;
 import org.bukkit.ChatColor;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Main extends JavaPlugin {
     public static Main plugin;
     private UpdateChecker updateChecker;
+    private PotionRunnable potionRunnable;
     @Override
     public void onEnable() {
         plugin = this;
@@ -30,6 +32,9 @@ public final class Main extends JavaPlugin {
                 "Plugin abilitato con successo! Creato da: " + ChatColor.GOLD + "@GMDIdevelopment / @GabryOsas");
         saveDefaultConfig();
         updateChecker = new UpdateChecker(this, "106719");
+        //Events
+        int interval = getConfig().getInt("Events.potion-events.Every") * 20;
+        (new PotionRunnable(OnFerite.arrayList, getConfig())).runTaskTimer((Plugin) this, 0L, interval);
     }
     @Override
     public void onLoad() {
@@ -77,8 +82,7 @@ public final class Main extends JavaPlugin {
                 "Listener caricati con successo!");
     }
     public void saveCommand(){
-        this.getCommand("bisturi").setExecutor(new BisturiGive());
-        this.getCommand("qareload").setExecutor(new ReloadConfig());
+        this.getCommand("qaproiettile").setExecutor(new QACommand());
         getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "\n" +
                 "┏━━━┓┏━━━┓┏━━━┓━━━━━━━━━━━━━━┏┓━━┏┓━━━┏┓━━━━━\n" +
                 "┃┏━┓┃┃┏━┓┃┃┏━┓┃━━━━━━━━━━━━━┏┛┗┓┏┛┗┓━━┃┃━━━━━\n" +

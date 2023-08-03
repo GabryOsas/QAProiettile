@@ -10,9 +10,9 @@ public class OnDeath implements Listener {
     @EventHandler
     public void onDeath(PlayerDeathEvent e){
         Player player = e.getEntity();
-        if (OnFerite.arrayList.contains(player.getName()) && Main.plugin.getConfig().getBoolean("QAProiettile.Remove-OnDeath")) {
-            OnFerite.arrayList.remove(player.getName());
-        }
+        if (!OnFerite.arrayList.contains(player)) return;
+        if (!Main.plugin.getConfig().getBoolean("QAProiettile.Boolean.Remove-On-Death")) return;
+        OnFerite.arrayList.remove(player);
     }
 }
 

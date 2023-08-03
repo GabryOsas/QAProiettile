@@ -1,6 +1,7 @@
 package me.gabryosas.listeners;
 
 import me.gabryosas.Main;
+import me.gabryosas.utils.Color;
 import me.zombie_striker.qg.api.QAWeaponDamageEntityEvent;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -13,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OnFerite implements Listener {
-    public static final List<String> arrayList = new ArrayList<>();
+    public static final List<Player> arrayList = new ArrayList<>();
     @EventHandler
     public void onFerite(QAWeaponDamageEntityEvent e) {
         if (!(e.getDamaged() instanceof Player)) {
@@ -38,9 +39,9 @@ public class OnFerite implements Listener {
         }
 
         target.sendTitle(
-                ChatColor.translateAlternateColorCodes('&', Main.plugin.getConfig().getString("QAProiettile.Title")),
-                ChatColor.translateAlternateColorCodes('&', Main.plugin.getConfig().getString("QAProiettile.Sub-Title")));
-        arrayList.add(target.getName());
+                Color.translateHexColorCodes(Main.plugin.getConfig().getString("QAProiettile.Title")),
+                Color.translateHexColorCodes(Main.plugin.getConfig().getString("QAProiettile.Sub-Title")));
+        arrayList.add(target);
     }
 
 
@@ -55,17 +56,17 @@ public class OnFerite implements Listener {
 
         Player player = e.getPlayer();
 
-        if (!arrayList.contains(player.getName())) {
+        if (!arrayList.contains(player)) {
             return;
         }
 
-        if (!Main.plugin.getConfig().getBoolean("QAProiettile.Anti-Jump")) {
+        if (!Main.plugin.getConfig().getBoolean("QAProiettile.Boolean.Anti-Jump")) {
             return;
         }
         double jumpThreshold = 0.2;
         if (heightDifference > jumpThreshold) {
             e.setCancelled(true);
-            player.sendMessage(ChatColor.translateAlternateColorCodes('&', Main.plugin.getConfig().getString("Message.Jump")));
+            player.sendMessage(Color.translateHexColorCodes(Main.plugin.getConfig().getString("Message.Jump")));
         }
     }
 }

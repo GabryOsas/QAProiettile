@@ -24,7 +24,7 @@ public class UpdateChecker {
         this.currentVersion = pluginDescription.getVersion();
     }
 
-    public boolean isNewVersionAvailable(Player player) {
+    public boolean isNewVersionAvailable() {
         try {
             URL url = new URL(spigotResourceURL);
             URLConnection connection = url.openConnection();
