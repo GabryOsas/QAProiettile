@@ -1,11 +1,9 @@
 package me.gabryosas;
 
 import me.gabryosas.commands.QACommand;
-import me.gabryosas.listeners.OnDeath;
-import me.gabryosas.listeners.OnFerite;
-import me.gabryosas.listeners.OnInteract;
-import me.gabryosas.listeners.OnJoin;
+import me.gabryosas.listeners.*;
 import me.gabryosas.runnable.PotionRunnable;
+import me.gabryosas.utils.TabCompleter;
 import me.gabryosas.utils.UpdateChecker;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.Plugin;
@@ -83,6 +81,7 @@ public final class Main extends JavaPlugin {
     }
     public void saveCommand(){
         this.getCommand("qaproiettile").setExecutor(new QACommand());
+        this.getCommand("qaproiettile").setTabCompleter(new TabCompleter());
         getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "\n" +
                 "┏━━━┓┏━━━┓┏━━━┓━━━━━━━━━━━━━━┏┓━━┏┓━━━┏┓━━━━━\n" +
                 "┃┏━┓┃┃┏━┓┃┃┏━┓┃━━━━━━━━━━━━━┏┛┗┓┏┛┗┓━━┃┃━━━━━\n" +

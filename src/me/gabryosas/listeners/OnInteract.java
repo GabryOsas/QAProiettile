@@ -1,6 +1,8 @@
 package me.gabryosas.listeners;
 
 import me.gabryosas.Main;
+import me.gabryosas.api.events.PlayerInjectEvent;
+import me.gabryosas.api.events.PlayerReviveTargetEvent;
 import me.gabryosas.commands.QACommand;
 import me.gabryosas.utils.Color;
 import me.gabryosas.utils.General;
@@ -21,6 +23,10 @@ public class OnInteract implements Listener {
         ItemStack mainHand = player.getInventory().getItemInMainHand();
         if (!mainHand.hasItemMeta()) return;
         if (mainHand.getType() != QACommand.material && !mainHand.getItemMeta().getDisplayName().equalsIgnoreCase(QACommand.displayName)) return;
+        PlayerReviveTargetEvent customEvent = new PlayerReviveTargetEvent(player, target);
+        Main.plugin.getServer().getPluginManager().callEvent(customEvent);
+        if (customEvent.isCancelled()) return;
+        if (target.isBlocking()) return;
         if (!OnFerite.arrayList.contains(target)) {
             String noDamageMessage = Color.translateHexColorCodes(Main.plugin.getConfig().getString("Message.No-Damage")).replace("%target%", target.getName());
             player.sendMessage(noDamageMessage);

@@ -37,6 +37,8 @@ Message:
   Anti-Console: "&cNon puoi eseguire questo comando dalla console!"
   Update-True: "&aCi sono nuovi aggiornamenti! Scarica la nuova versione dal seguente link: %link%"
   Update-False: "&cNon ci sono aggiornamenti al momento."
+  Help:
+    - "&cParametri sbagliati!"
 Events: #You cannot add other events you can only edit them ;P
   potion-events:
     Enable: true

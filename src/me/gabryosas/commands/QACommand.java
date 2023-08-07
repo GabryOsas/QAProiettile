@@ -1,13 +1,16 @@
 package me.gabryosas.commands;
 
 import me.gabryosas.Main;
+import me.gabryosas.api.QAProiettileAPI;
 import me.gabryosas.utils.Color;
 import me.gabryosas.utils.General;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -31,6 +34,7 @@ public class QACommand implements CommandExecutor {
         }
         Player player = (Player) sender;
         if (args.length != 1){
+            getHelpMessage(player);
             return true;
         }
         if (args[0].equalsIgnoreCase("reload")){
@@ -60,5 +64,18 @@ public class QACommand implements CommandExecutor {
             lore.set(i, translated);
         }
         return lore;
+    }
+    public static void getHelpMessage(Player player) {
+        FileConfiguration config = Main.plugin.getConfig();
+        if (config.contains("Message.Help")) {
+            List<String> helpMessageList = config.getStringList("Message.Help");
+            StringBuilder helpMessageBuilder = new StringBuilder();
+            for (String line : helpMessageList) {
+                String translatedLine = Color.translateHexColorCodes(line);
+                helpMessageBuilder.append(translatedLine).append("\n");
+            }
+            String helpMessage = helpMessageBuilder.toString().trim();
+            player.sendMessage(helpMessage);
+        }
     }
 }

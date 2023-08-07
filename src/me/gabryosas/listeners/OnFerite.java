@@ -1,6 +1,7 @@
 package me.gabryosas.listeners;
 
 import me.gabryosas.Main;
+import me.gabryosas.api.events.PlayerInjectEvent;
 import me.gabryosas.utils.Color;
 import me.zombie_striker.qg.api.QAWeaponDamageEntityEvent;
 import org.bukkit.ChatColor;
@@ -23,7 +24,10 @@ public class OnFerite implements Listener {
 
         Player player = e.getPlayer();
         Player target = (Player) e.getDamaged();
-
+        PlayerInjectEvent customEvent = new PlayerInjectEvent(player, target, e.getGun());
+        Main.plugin.getServer().getPluginManager().callEvent(customEvent);
+        if (customEvent.isCancelled()) return;
+        if (target.isBlocking()) return;
         if (player.getWorld().getName().equalsIgnoreCase(Main.plugin.getConfig().getString("QAProiettile.Blacklist-World"))) {
             return;
         }
