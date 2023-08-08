@@ -22,7 +22,7 @@ public class OnInteract implements Listener {
         if (!(e.getHand() == EquipmentSlot.HAND)) return;
         ItemStack mainHand = player.getInventory().getItemInMainHand();
         if (!mainHand.hasItemMeta()) return;
-        if (mainHand.getType() != QACommand.material && !mainHand.getItemMeta().getDisplayName().equalsIgnoreCase(QACommand.displayName)) return;
+        if (!mainHand.getItemMeta().getDisplayName().equalsIgnoreCase(QACommand.displayName)) return;
         PlayerReviveTargetEvent customEvent = new PlayerReviveTargetEvent(player, target);
         Main.plugin.getServer().getPluginManager().callEvent(customEvent);
         if (customEvent.isCancelled()) return;
