@@ -17,7 +17,7 @@ public class General {
         itemStack.setItemMeta(itemMeta);
         return itemStack;
     }
-    public static ItemStack createItemStackQuantity(Material material, String name, int custom, List<String> lore, int quantity){
+    public static ItemStack createItemStack(Material material, String name, int custom, List<String> lore, int quantity){
         ItemStack itemStack = new ItemStack(material);
         itemStack.setAmount(quantity);
         ItemMeta itemMeta = itemStack.getItemMeta();

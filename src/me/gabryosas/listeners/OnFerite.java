@@ -2,14 +2,18 @@ package me.gabryosas.listeners;
 
 import me.gabryosas.Main;
 import me.gabryosas.api.events.PlayerInjectEvent;
+import me.gabryosas.runnable.PotionRunnable;
 import me.gabryosas.utils.Color;
 import me.zombie_striker.qg.api.QAWeaponDamageEntityEvent;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,10 +27,12 @@ public class OnFerite implements Listener {
         }
 
         Player player = e.getPlayer();
+
         Player target = (Player) e.getDamaged();
         PlayerInjectEvent customEvent = new PlayerInjectEvent(player, target, e.getGun());
         Main.plugin.getServer().getPluginManager().callEvent(customEvent);
         if (customEvent.isCancelled()) return;
+        if (arrayList.contains(target)) return;
         if (target.isBlocking()) return;
         if (player.getWorld().getName().equalsIgnoreCase(Main.plugin.getConfig().getString("QAProiettile.Blacklist-World"))) {
             return;
@@ -42,12 +48,22 @@ public class OnFerite implements Listener {
             return;
         }
 
+        if (target.isInsideVehicle() && Main.plugin.getConfig().getBoolean("QAProiettile.Boolean.Exit-On-Vehicle")){
+            Location location = new Location(target.getWorld(), target.getLocation().getX(), target.getLocation().getY(), target.getLocation().getZ(), target.getLocation().getYaw(), target.getLocation().getPitch());
+            target.teleport(location);
+        }
         target.sendTitle(
                 Color.translateHexColorCodes(Main.plugin.getConfig().getString("QAProiettile.Title")),
                 Color.translateHexColorCodes(Main.plugin.getConfig().getString("QAProiettile.Sub-Title")));
         arrayList.add(target);
-    }
 
+        if (Main.plugin.getConfig().getBoolean("QAProiettile.Boolean.Effect-On-Damage")) {
+            ConfigurationSection potionSection = Main.plugin.getConfig().getConfigurationSection("Events.potion-events");
+            if (potionSection == null) return;
+            PotionRunnable.applyPotionEffects((List<String>) potionSection.getList("Effects"), target);
+        }
+
+    }
 
     @EventHandler
     public void onJump(PlayerMoveEvent e) {
@@ -70,7 +86,9 @@ public class OnFerite implements Listener {
         double jumpThreshold = 0.2;
         if (heightDifference > jumpThreshold) {
             e.setCancelled(true);
-            player.sendMessage(Color.translateHexColorCodes(Main.plugin.getConfig().getString("Message.Jump")));
+            if (!Main.plugin.getConfig().getString("Message.Jump").equalsIgnoreCase("none")){
+                player.sendMessage(Color.translateHexColorCodes(Main.plugin.getConfig().getString("Message.Jump")));
+            }
         }
     }
 }

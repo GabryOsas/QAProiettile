@@ -15,6 +15,9 @@ QAProiettile:
     Lore:
       - "&7Utilizzalo per guarire le persone!"
   Boolean:
+    Exit-On-Vehicle: true
+    Effect-On-Damage: true
+    Remove-Items: true
     Update: true
     Credits: true
     Anti-Jump: true
@@ -29,7 +32,7 @@ QAProiettile:
 Message:
   No-Perms: "&cNon hai abbastanza permessi!"
   Give: "&aItem givvato con successo!"
-  Jump: "&cSei ferito da un proiettile, di conseguenza non puoi saltare!"
+  Jump: "&cSei ferito da un proiettile, di conseguenza non puoi saltare!" #If you want to avoid sending the message, replace all content with none
   Revive: "&aHai guarito il giocatore &e%target%!"
   Target-Revive: "&aSei stato guarito da &e%player%"
   No-Damage: "&cIl giocatore &e%target% &cnon è ferito!"

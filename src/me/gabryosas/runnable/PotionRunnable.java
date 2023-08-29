@@ -25,6 +25,22 @@ public class PotionRunnable extends BukkitRunnable {
             applyPotionEffects((List<String>) potionSection.getList("Effects"));
         }
     }
+    public static void applyPotionEffects(List<String> effects, Player player) {
+        if (effects != null) {
+            for (String effect : effects) {
+                String[] effectData = effect.split(", ");
+                if (effectData.length >= 3) {
+                    String effectType = effectData[0];
+                    int level = Integer.parseInt(effectData[1]);
+                    int duration = Integer.parseInt(effectData[2]) * 20;
+                    PotionEffectType potionEffectType = PotionEffectType.getByName(effectType);
+                    if (potionEffectType != null) {
+                        player.addPotionEffect(new PotionEffect(potionEffectType, duration, level - 1));
+                    }
+                }
+            }
+        }
+    }
     private void applyPotionEffects(List<String> effects) {
         if (effects != null) {
             for (String effect : effects) {

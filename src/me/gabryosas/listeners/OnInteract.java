@@ -32,11 +32,13 @@ public class OnInteract implements Listener {
             player.sendMessage(noDamageMessage);
             return;
         }
-        player.getInventory().removeItem(General.createItemStackQuantity(QACommand.material, QACommand.displayName, QACommand.customModelData, QACommand.getLore(), 1));
         OnFerite.arrayList.remove(target);
         String reviveMessage = Color.translateHexColorCodes(Main.plugin.getConfig().getString("Message.Revive")).replace("%target%", target.getName());
         String targetReviveMessage = Color.translateHexColorCodes(Main.plugin.getConfig().getString("Message.Target-Revive")).replace("%player%", player.getName());
         player.sendMessage(reviveMessage);
         target.sendMessage(targetReviveMessage);
+        if (Main.plugin.getConfig().getBoolean("QAProiettile.Boolean.Remove-Items")){
+            player.getInventory().removeItem(General.createItemStack(QACommand.material, QACommand.displayName, QACommand.customModelData, QACommand.getLore(), 1));
+        }
     }
 }
