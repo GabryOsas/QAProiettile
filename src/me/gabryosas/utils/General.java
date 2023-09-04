@@ -8,6 +8,10 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.List;
 
 public class General {
+    public static ItemStack createItemStack(Material material){
+        ItemStack itemStack = new ItemStack(material);
+        return itemStack;
+    }
     public static ItemStack createItemStack(Material material, String name, int custom, List<String> lore){
         ItemStack itemStack = new ItemStack(material);
         ItemMeta itemMeta = itemStack.getItemMeta();

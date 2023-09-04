@@ -4,9 +4,11 @@ import me.gabryosas.Main;
 import me.gabryosas.api.events.PlayerInjectEvent;
 import me.gabryosas.runnable.PotionRunnable;
 import me.gabryosas.utils.Color;
+import me.gabryosas.utils.General;
 import me.zombie_striker.qg.api.QAWeaponDamageEntityEvent;
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
+import org.bukkit.*;
+import org.bukkit.block.Block;
+import org.bukkit.block.data.BlockData;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -14,6 +16,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.util.Vector;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +51,18 @@ public class OnFerite implements Listener {
         if (Main.plugin.getConfig().getStringList("QAProiettile.Blacklist-Gun").contains(gun)) {
             return;
         }
-
+        if (Main.plugin.getConfig().getBoolean("QAProiettile.Boolean.Knockback-On-Damage")){
+            knockPlayer(player, target);
+        }
+        if (Main.plugin.getConfig().getBoolean("QAProiettile.Boolean.Blood-Block")) {
+            Location location = target.getLocation();
+            Block block = player.getWorld().getBlockAt(location);
+            if (block.getType() != Material.AIR && block.getType() != Material.REDSTONE_WIRE) {
+                player.getWorld().dropItem(location, General.createItemStack(block.getType()));
+            }
+            block.setType(Material.REDSTONE_WIRE);
+            player.getWorld().playEffect(target.getLocation(), Effect.STEP_SOUND, Material.REDSTONE_BLOCK);
+        }
         if (target.isInsideVehicle() && Main.plugin.getConfig().getBoolean("QAProiettile.Boolean.Exit-On-Vehicle")){
             Location location = new Location(target.getWorld(), target.getLocation().getX(), target.getLocation().getY(), target.getLocation().getZ(), target.getLocation().getYaw(), target.getLocation().getPitch());
             target.teleport(location);
@@ -62,9 +77,16 @@ public class OnFerite implements Listener {
             if (potionSection == null) return;
             PotionRunnable.applyPotionEffects((List<String>) potionSection.getList("Effects"), target);
         }
-
     }
-
+    private static void knockPlayer(Player player, Player target) {
+        Vector knockback = player.getLocation().getDirection().multiply(1.0D);
+        target.setVelocity(knockback);
+        new BukkitRunnable() {
+            public void run() {
+                target.setVelocity(knockback);
+            }
+        }.runTaskLater(Main.plugin, 1l);
+    }
     @EventHandler
     public void onJump(PlayerMoveEvent e) {
         Location from = e.getFrom();

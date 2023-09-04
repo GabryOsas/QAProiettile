@@ -13,6 +13,7 @@ public class OnDeath implements Listener {
         if (!OnFerite.arrayList.contains(player)) return;
         if (!Main.plugin.getConfig().getBoolean("QAProiettile.Boolean.Remove-On-Death")) return;
         OnFerite.arrayList.remove(player);
+
     }
 }
 
